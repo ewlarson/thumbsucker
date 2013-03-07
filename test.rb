@@ -37,7 +37,7 @@ page.body.split(';').select{ |var|
  book[var[0]] = var[1].split(',').size > 1 ? var[1].split(',').map{|s| s.to_i} : var[1].gsub(/'/,'')
 }
 
+# @TODO: Use Typhoeus for parallel requests instead
 # CURL
 # -`curl 'http://ia600309.us.archive.org/BookReader/BookReaderImages.php?zip=/33/items/britishfloramedi01bartuoft/britishfloramedi01bartuoft_jp2.zip&file=britishfloramedi01bartuoft_jp2/britishfloramedi01bartuoft_[0000-0482].jp2&scale=2&rotate=0' -o "british_flora/file_#1.jpg"`
-
 `curl "http://#{book['br.server']}/BookReader/BookReaderImages.php?zip=#{book['br.zip']}&file=#{book['br.bookId']}_jp2/#{book['br.bookId']}_[0000-#{"%04d" % book['br.leafMap'].last}].jp2&scale=2&rotate=0" -o "#{ARGV[0]}/file_#1.jpg"`
